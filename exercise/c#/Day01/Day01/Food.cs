@@ -5,13 +5,12 @@
         bool ApprovedForConsumption,
         Guid? InspectorId)
     {
-        public bool IsEdible(Func<DateOnly> now)
-        {
-            if (ExpirationDate.CompareTo(now()) > 0 &&
-                ApprovedForConsumption &&
-                InspectorId != null)
-                return true;
-            return false;
-        }
+        public bool IsEdible(Func<DateOnly> now) => IsFresh(now) && CanBeConsumed() && HasBeenInspected();
+
+        private bool CanBeConsumed() => ApprovedForConsumption;
+
+        private bool HasBeenInspected() => InspectorId != null;
+
+        private bool IsFresh(Func<DateOnly> now) => ExpirationDate.IsGreaterThan(now());
     }
 }
