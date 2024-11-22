@@ -8,17 +8,17 @@
             {
                 if (input <= 100)
                 {
-                    if (input % 3 == 0 && input % 5 == 0)
+                    if (IsFizz(input) && IsBuzz(input))
                     {
                         return "FizzBuzz";
                     }
 
-                    if (input % 3 == 0)
+                    if (IsFizz(input))
                     {
                         return "Fizz";
                     }
 
-                    if (input % 5 == 0)
+                    if (IsBuzz(input))
                     {
                         return "Buzz";
                     }
@@ -35,5 +35,9 @@
                 throw new OutOfRangeException();
             }
         }
+
+        private static bool IsFizz(int input) => input % 3 == 0;
+
+        private static bool IsBuzz(int input) => input % 5 == 0;
     }
 }
